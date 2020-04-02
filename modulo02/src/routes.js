@@ -1,9 +1,10 @@
-const { Router } = require('express');
+/* eslint-disable prettier/prettier */
+import { Router } from 'express';
 
 const routes = new Router();
 
 routes.get('/', (req, res) => {
-    return res.json({message: 'Hello Teste.'})
-});
+  return res.json({message: 'Hello Teste.'});
+})
 
 export default routes;
