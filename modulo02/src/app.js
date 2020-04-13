@@ -1,5 +1,4 @@
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable linebreak-style */
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import Youch from 'youch';
@@ -36,8 +35,12 @@ class App {
 
   exceptionHandler() {
     this.server.use(async (err, req, res, next) => {
-      const errors = await new Youch(err, req).toJSON();
-      return res.status(500).json(errors);
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(err, req).toJSON();
+        return res.status(500).json(errors);
+      }
+
+      return res.status(500).json({ error: 'Internal server error' });
     });
   }
 }
